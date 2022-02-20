@@ -38,4 +38,4 @@ ext {
     PUBLISH_VERSION = '0.4.2'
     PUBLISH_ARTIFACT_ID = 'taskerpluginlibrary'
 }
-apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
+// apply from: "${rootProject.projectDir}/scripts/publish-mavencentral.gradle"
