@@ -24,7 +24,7 @@ class BroadcastReceiverAction : BroadcastReceiver() {
 
 class IntentServiceAction : IntentServiceParallel("IntentServiceTaskerAction") {
     override fun onHandleIntent(intent: Intent) {
-        if (getAppVersion(ctx, "net.dinglisch.android.taskerm") == "6.4.15") {
+        if ("6.4.15" == getAppVersion("net.dinglisch.android.taskerm")) {
             return
         }
         
@@ -36,9 +36,9 @@ class IntentServiceAction : IntentServiceParallel("IntentServiceTaskerAction") {
         }
     }
 
-    fun getAppVersion(context: Context, packageName: String): String? {
+    fun getAppVersion(packageName: String): String? {
         return try {
-            val packageInfo = context.packageManager.getPackageInfo(packageName, 0)
+            val packageInfo = packageManager.getPackageInfo(packageName, 0)
             packageInfo.versionName
         } catch (e: PackageManager.NameNotFoundException) {
             null // App is not installed
