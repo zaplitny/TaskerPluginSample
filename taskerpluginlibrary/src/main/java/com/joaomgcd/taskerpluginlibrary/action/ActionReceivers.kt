@@ -11,7 +11,7 @@ import com.joaomgcd.taskerpluginlibrary.runner.IntentServiceParallel
 import net.dinglisch.android.tasker.TaskerPlugin
 
 
-class BroadcastReceiverAction : BroadcastReceiver() {
+open class BroadcastReceiverAction : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         resultCode = TaskerPlugin.Setting.RESULT_CODE_PENDING
         try {
