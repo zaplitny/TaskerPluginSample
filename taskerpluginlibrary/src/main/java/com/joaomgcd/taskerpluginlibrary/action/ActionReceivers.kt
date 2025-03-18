@@ -3,7 +3,6 @@ package com.joaomgcd.taskerpluginlibrary.action
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import com.joaomgcd.taskerpluginlibrary.extensions.canBindFireService
 import com.joaomgcd.taskerpluginlibrary.extensions.mayNeedToStartForeground
 import com.joaomgcd.taskerpluginlibrary.extensions.runFromTasker
@@ -24,24 +23,11 @@ open class BroadcastReceiverAction : BroadcastReceiver() {
 
 class IntentServiceAction : IntentServiceParallel("IntentServiceTaskerAction") {
     override fun onHandleIntent(intent: Intent) {
-        if ("6.4.15" == getAppVersion("net.dinglisch.android.taskerm")) {
-            return
-        }
-        
         val mayNeedToStartForeground: Boolean = intent.mayNeedToStartForeground
         startForegroundIfNeeded(mayNeedToStartForeground)
         val result = TaskerPluginRunnerAction.runFromIntent(this, intent)
         if (!result.hasStartedForeground) {
             startForegroundIfNeeded(mayNeedToStartForeground)
-        }
-    }
-
-    fun getAppVersion(packageName: String): String? {
-        return try {
-            val packageInfo = packageManager.getPackageInfo(packageName, 0)
-            packageInfo.versionName
-        } catch (e: PackageManager.NameNotFoundException) {
-            null // App is not installed
         }
     }
 }
